@@ -29,7 +29,7 @@ export default function GameViewModel() {
     const [time, setTime] = useState();
 
     // user progression
-    const [level, setLevel] = useState(1);
+    const [gameState, setGameState] = useState(1);
 
     // position
     const [x, setX] = useState(0);
@@ -62,8 +62,8 @@ export default function GameViewModel() {
         population,
         pollution,
         happiness,
-        time,
-        level,
+        time, setTime,
+        gameState, setGameState,
         grid
     }
 }; 

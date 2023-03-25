@@ -1,15 +1,17 @@
 import Link from 'next/link'
 
+import GenerationGraph  from '../components/GenerationGraph'
+
 export default function IndexPage() {
   return (
     <div>
-      <h1>Millennium Power</h1>
+      <h1 className='text-3xl'>Millennium Power</h1>
 
       <p>How would you manage the greatest energy transformation since the invention of the lightbulb?</p>
 
-      <p>Graph</p>
+      <GenerationGraph />
 
-      <button>Play</button>
+      <Link href="/play">Play</Link>
     </div>
   )
 }

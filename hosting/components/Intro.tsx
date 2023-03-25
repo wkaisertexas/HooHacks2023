@@ -1,6 +1,7 @@
-export default function Intro() {
-    return <div>
-        <div>
+// take in the viewmodel as a prop
+export default function Intro(props: any) {
+    return <div onClick={() => {props.viewModel.setGameState(2)}}>
+        <div className='flex h-screen w-screen p-10 flex-col justify-center items-center bg-black text-white'>
             <p>
                 MILLENIUM TOWN IS IN DIRE NEED OF POWER.
             </p>
