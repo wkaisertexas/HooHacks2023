@@ -4,7 +4,7 @@ import Toolbar from './Toolbar';
 
 export default function Game(props) {
     return (
-        <div>
+        <div className='flex flex-col justify-between w-full h-full'>
             <Toolbar viewModel={props.viewModel} /> 
 
             <p>This is the game</p>
