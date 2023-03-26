@@ -61,31 +61,33 @@ export default function Menu(props){
 
     if(openedMenu){
         return (
-            <div className='flex flex-col stroke-2 rounded-xl max-w-3xl'>
                 <div className='flex flex-col justify-center items-center bg-white rounded-lg p-5'>
                     <p className='text-3xl font-bold'>Plants</p>
                     <p className='text-xl font-bold' onClick={toggleMenu}>Close Menu</p>
-                    <div className='flex flex-row justify-center items-center'>
+                    <div className='overflow-x-auto'>
                         {plants.map((plant) => {
                             return (
-                                <div className='flex flex-col justify-center items-center'>
-                                    <h2>{plant.name}</h2>
-                                    {/* <Image alt={plant.description} src={plant.image}/> */}
-                                    <p>{plant.description}</p>
-                                    <p>Cost: {plant.cost}</p>
-                                    <p>Power: {plant.power}</p>
-                                    <p>Pollution: {plant.pollution}</p>
+                                <div className='card flex flex-row'>
+                                    <div className='flex flex-col justify-center items-center'>
+                                        <h2>{plant.name}</h2>
+                                        <p>{plant.description}</p>
+                                        <p>Cost: {plant.cost}</p>
+                                        <p>Power: {plant.power}</p>
+                                        <p>Pollution: {plant.pollution}</p>
+                                    </div>
+                                    <div className='m-1 p-2'>
+                                        {/* <Image className='stroke-1 rounded-lg' alt={plant.description} src={plant.image}/> */}
+                                    </div>
                                 </div>
                             )
                         })}
                     </div>
-                </div>
             </div>
         )
     } 
 
     return (
-        <h1 onClick={toggleMenu}>
+        <h1 className='stroke-1 rounded-lg p-2 m-2' onClick={toggleMenu}>
             <Image src='/menu.svg' alt='Menu' width={50} height={50}/>
         </h1>
         )

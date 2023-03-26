@@ -26,7 +26,19 @@ export default function GameViewModel() {
     const [population, setPopulation] = useState(POPULATION);
     const [pollution, setPollution] = useState(POLLUTION);
     const [happiness, setHappiness] = useState(HAPPINESS);
-    const [time, setTime] = useState();
+    
+    const [time, setTime] = useState(0);
+    const [paused, setPaused] = useState(false);
+
+    useEffect(() => {
+        if(paused) return;
+
+        const interval = setInterval(() => {
+            setTime(time + 0.2);
+        }, 200);
+        return () => clearInterval(interval);
+    }, [time]);
+
 
     // user progression
     const [gameState, setGameState] = useState(1);
@@ -56,13 +68,26 @@ export default function GameViewModel() {
         }
     }
 
+    const toggleTime = () => {
+        setPaused(!paused);
+    }
+
+    const getDate = () => {
+        // TODO: convert time to date
+
+        return time;
+    }
+
     return {
-        money,
-        power,
-        population,
-        pollution,
-        happiness,
-        time, setTime,
+        money, setMoney,
+        power, setPower,
+        population, setPopulation,
+        pollution, setPollution,
+        happiness, setHappiness,
+        time, setTime, getDate,
+        paused, setPaused, toggleTime,
+        x, setX,
+        y, setY,
         gameState, setGameState,
         grid
     }
