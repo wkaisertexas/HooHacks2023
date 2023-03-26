@@ -12,7 +12,7 @@ export default function IndexPage() {
       <p className='text-2xl'><br />Millennium Power puts you in charge of managing the power grids of Millenium Town.<br />
       Do you have what it takes to keep the town happy?</p>
 
-      <br /><GenerationGraph /><br />
+    
       <Link className='text-3xl button' style={{color: "green"}} href="/play"><b>Play</b></Link>
     </div>
   )
