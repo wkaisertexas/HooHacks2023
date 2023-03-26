@@ -9,7 +9,7 @@ export default function IndexPage() {
 
       <p>How would you manage the greatest energy transformation since the invention of the lightbulb?</p>
 
-      <GenerationGraph />
+      {/* <GenerationGraph /> */}
 
       <Link href="/play">Play</Link>
     </div>

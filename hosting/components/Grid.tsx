@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import Cell from './Cell';
 
-export default function Grid({numRows, numCols}) {
+const NUMROWS = 50;
+const NUMCOLS = 50;
+
+export default function Grid(props) {
     const [grid, setGrid] = useState(() => {
         const rows = [];
-        for(let i = 0; i < numRows; i++){
-            rows.push(Array.from(Array(numCols), () => false));
+        for(let i = 0; i < NUMROWS; i++){
+            rows.push(Array.from(Array(NUMCOLS), () => false));
         }
         return rows;
     })

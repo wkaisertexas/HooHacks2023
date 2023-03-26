@@ -1,6 +1,7 @@
 // game.tsx functional component
 import Grid from './Grid';
 import Toolbar from './Toolbar';
+import Menu from './Menu';
 
 export default function Game(props) {
     return (
@@ -10,7 +11,7 @@ export default function Game(props) {
             <p>This is the game</p>
             <Grid viewModel={props.viewModel}/> 
 
-            <p>This is the footer below</p>
+            <Menu viewModel={props.viewModel} />
         </div>
     )
 }
