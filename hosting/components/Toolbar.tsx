@@ -28,9 +28,9 @@ export default function Toolbar(props) {
     const prettyPop = (pop) => {
         let amount = Math.log10(pop);
         if (amount < 3) {
-            return `${Math.round(pop)} Pop.`;
+            return `${Math.round(pop)}`;
         }
-        return `${Math.round(pop / 1000)} K Pop.`;
+        return `${Math.round(pop / 1000)} K`;
     }
 
     return (

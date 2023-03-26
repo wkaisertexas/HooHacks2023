@@ -12,6 +12,8 @@ const MOVE_SPEED = 1; // moves per second
 const NUMROWS = 20;
 const NUMCOLS = 20;
 
+const SECONDS_TO_DAYS = 7; // 1 second = 7 days
+
 export default function GameViewModel() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
@@ -39,8 +41,8 @@ export default function GameViewModel() {
         if(paused) return;
 
         const interval = setInterval(() => {
-            setTime(time + 0.2);
-        }, 200);
+            setTime(time + 0.1);
+        }, 100);
         return () => clearInterval(interval);
     }, [time]);
 
@@ -83,9 +85,11 @@ export default function GameViewModel() {
     }
 
     const getDate = () => {
-        // TODO: convert time to date
+        var date = new Date(2000, 0, 1);
+        date.setDate(date.getDate() + time * SECONDS_TO_DAYS);
+        var stri = new Date(date).toDateString().split(" ");
 
-        return time;
+        return `${stri[1]} ${stri[3]}`;
     }
 
     const getTime = () => {

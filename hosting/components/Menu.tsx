@@ -5,7 +5,7 @@ const plants = [
         cost: 100,
         power: 1,
         pollution: 1,
-        image: 'coal.png',
+        image: '/coal.png',
     },
     {
         name: 'Nuclear',
@@ -13,7 +13,7 @@ const plants = [
         cost: 1000,
         power: 10,
         pollution: 0,
-        image: 'nuclear.png',
+        image: '/nuclear.png',
     },
     {
         name: 'Solar',
@@ -21,7 +21,7 @@ const plants = [
         cost: 10000,
         power: 100,
         pollution: 0,
-        image: 'solar.png',
+        image: '/solar.png',
     },
     {
         name: 'Wind',
@@ -29,7 +29,7 @@ const plants = [
         cost: 100000,
         power: 1000,
         pollution: 0,
-        image: 'wind.png',
+        image: '/wind.png',
     },
     {
         name: 'Hydro',
@@ -37,7 +37,7 @@ const plants = [
         cost: 1000000,
         power: 10000,
         pollution: 0,
-        image: 'hydro.png',
+        image: '/hydro.png',
     },
     {
         name: 'Geothermal',
@@ -45,7 +45,7 @@ const plants = [
         cost: 10000000,
         power: 100000,
         pollution: 0,
-        image: 'geothermal.png',
+        image: '/geothermal.png',
     },
 ]
 
@@ -61,7 +61,7 @@ export default function Menu(props){
 
     if(openedMenu){
         return (
-                <div className='flex flex-col justify-center bg-white rounded-lg p-5'>
+                <div className='flex flex-col justify-center bg-white rounded-lg p-5 m-2'>
                     <div className='flex flex-col items-start'>
                         <p className='text-3xl font-bold'>Power Plants</p>
                         <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>

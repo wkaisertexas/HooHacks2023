@@ -5,7 +5,7 @@ const NUMROWS = 20;
 const NUMCOLS = 20;
 
 export default function Grid(props) {
-    const [viewModel, setViewModel] = useState(props.viewModel);
+    const viewModel = props.viewModel;
     
     const setCell = (row, col, val) => {
         const newGrid = [...viewModel.grid];
