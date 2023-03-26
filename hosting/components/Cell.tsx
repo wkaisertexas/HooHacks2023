@@ -5,7 +5,8 @@ export enum CellType {
     Grass = 0,
     House = 1,
     Tree = 2,
-    Empty = 4
+    Solar = 3,
+    Empty = 4,
 }
 
 const CELL_SIZE = 64;
@@ -13,25 +14,24 @@ const CELL_SIZE = 64;
 import Image from 'next/image'
 
 const MAPPING = {
-    0: '/grass.png',
-    1: '',
-    2: '',
-    3: '',
-    4: '',
+    '0': '/grass.png',
+    '1': '/home_day.png',
+    '2': '/trees.png',
+    '3': '/solar.png',
+    '4': '',
 }
 
 export default function Cell(props) {
     if(props.value == CellType.Empty) {
         return (
-            <div className='w-16 h-16'>
+            <div className='w-[32rem] h-[32rem]'>
             </div>
         ) 
     }
 
     return (
-        <div className='w-16 h-16'>
-            <Image className="z-0" alt="" width="64" height="64" src={MAPPING[props.value]} />
-            <Image className="z-10" alt="grass" width="64" height="64" src='/grass.png' />
+        <div className=''>
+            <Image className='' alt="" width="128" height="128" src={MAPPING[props.value]} />
         </div>
     )
 }

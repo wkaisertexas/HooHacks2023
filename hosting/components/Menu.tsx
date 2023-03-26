@@ -1,12 +1,12 @@
 const plants = [
-    {
-        name: 'Coal',
-        description: 'Coal is a fossil fuel that is formed from the remains of dead plants and animals. It is the most abundant fossil fuel and is used to generate electricity and heat homes and businesses.',
-        cost: 100,
-        power: 1,
-        pollution: 1,
-        image: '/coal.png',
-    },
+    // {
+    //     name: 'Coal',
+    //     description: 'Coal is a fossil fuel that is formed from the remains of dead plants and animals. It is the most abundant fossil fuel and is used to generate electricity and heat homes and businesses.',
+    //     cost: 100,
+    //     power: 1,
+    //     pollution: 1,
+    //     image: '/coal.png',
+    // },
     {
         name: 'Nuclear',
         description: 'Nuclear power is the use of nuclear reactions that release nuclear energy to generate heat, which most frequently is then used in steam turbines to produce electricity in a nuclear power plant.',
@@ -31,22 +31,22 @@ const plants = [
         pollution: 0,
         image: '/wind.png',
     },
-    {
-        name: 'Hydro',
-        description: 'Hydropower, or water power, is power derived from the energy of falling or fast-flowing water, which may be harnessed for useful purposes. Hydropower is a renewable energy source.',
-        cost: 1000000,
-        power: 10000,
-        pollution: 0,
-        image: '/hydro.png',
-    },
-    {
-        name: 'Geothermal',
-        description: 'Geothermal energy is thermal energy generated and stored in the Earth. Thermal energy is the energy that determines the temperature of matter. The geothermal energy of the Earth\'s crust originates from the original formation of the planet and from radioactive decay of materials (in particular uranium).',
-        cost: 10000000,
-        power: 100000,
-        pollution: 0,
-        image: '/geothermal.png',
-    },
+    // {
+    //     name: 'Hydro',
+    //     description: 'Hydropower, or water power, is power derived from the energy of falling or fast-flowing water, which may be harnessed for useful purposes. Hydropower is a renewable energy source.',
+    //     cost: 1000000,
+    //     power: 10000,
+    //     pollution: 0,
+    //     image: '/hydro.png',
+    // },
+    // {
+    //     name: 'Geothermal',
+    //     description: 'Geothermal energy is thermal energy generated and stored in the Earth. Thermal energy is the energy that determines the temperature of matter. The geothermal energy of the Earth\'s crust originates from the original formation of the planet and from radioactive decay of materials (in particular uranium).',
+    //     cost: 10000000,
+    //     power: 100000,
+    //     pollution: 0,
+    //     image: '/geothermal.png',
+    // },
 ]
 
 import React, {useState} from 'react';
@@ -61,30 +61,28 @@ export default function Menu(props){
 
     if(openedMenu){
         return (
-                <div className='flex flex-col justify-center bg-white rounded-lg p-5 m-2'>
+                <div className='flex flex-col justify-center bg-white rounded-lg p-5 m-2 '>
                     <div className='flex flex-col items-start'>
                         <p className='text-3xl font-bold'>Power Plants</p>
                         <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>
                     </div>
-                    <div className='overflow-y-scroll'>
-                    <div className='flex flex-row'>
+                    <div className='overflow-x-scroll flex'>
                         {plants.map((plant) => {
                             return (
                                 <div className='card flex flex-row'>
                                     <div className='flex flex-col'>
-                                        <h2>{plant.name}</h2>
+                                        <h2 className='text-3xl font-bold'>{plant.name}</h2>
                                         <p>{plant.description}</p>
-                                        <p>Cost: {plant.cost}</p>
-                                        <p>Power: {plant.power}</p>
-                                        <p>Pollution: {plant.pollution}</p>
+                                        <p><strong>Cost:</strong> {plant.cost}</p>
+                                        <p><strong>Power:</strong> {plant.power}</p>
+                                        <p><strong>Pollution:</strong> {plant.pollution}</p>
                                     </div>
-                                    <div className='m-1 p-2'>
-                                        {/* <Image className='stroke-1 rounded-lg' alt={plant.description} src={plant.image}/> */}
+                                    <div className='m-1 p-2 w-[32rem] stroke-black'>
+                                        <Image className='stroke-1 rounded-lg w-max' width='128' height='128' alt={plant.description} src={plant.image}/>
                                     </div>
                                 </div>
                             )
                         })}
-                    </div>
                     </div>
             </div>
         )

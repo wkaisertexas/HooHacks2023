@@ -7,14 +7,8 @@ const NUMCOLS = 20;
 export default function Grid(props) {
     const viewModel = props.viewModel;
     
-    const setCell = (row, col, val) => {
-        const newGrid = [...viewModel.grid];
-        newGrid[row * NUMROWS + col] = val;
-        viewModel.setGrid(newGrid);
-    }
-    
     return (
-        <div className='griddy top-0 left-0 absolute -z-10'>
+        <div className='griddy bg-grass top-0 left-0 absolute -z-10'>
             {
                 viewModel.grid.map((elem, id) => (
                     <Cell key={id} value={elem}/>

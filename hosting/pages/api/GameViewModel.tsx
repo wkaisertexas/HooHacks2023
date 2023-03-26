@@ -14,6 +14,51 @@ const NUMCOLS = 20;
 
 const SECONDS_TO_DAYS = 7; // 1 second = 7 days
 
+const SAMPLE_DATA = [
+    {
+        name: 'Page A',
+        uv: 4000,
+        pv: 2400,
+        amt: 2400,
+      },
+      {
+        name: 'Page B',
+        uv: 3000,
+        pv: 1398,
+        amt: 2210,
+      },
+      {
+        name: 'Page C',
+        uv: 2000,
+        pv: 9800,
+        amt: 2290,
+      },
+      {
+        name: 'Page D',
+        uv: 2780,
+        pv: 3908,
+        amt: 2000,
+      },
+      {
+        name: 'Page E',
+        uv: 1890,
+        pv: 4800,
+        amt: 2181,
+      },
+      {
+        name: 'Page F',
+        uv: 2390,
+        pv: 3800,
+        amt: 2500,
+      },
+      {
+        name: 'Page G',
+        uv: 3490,
+        pv: 4300,
+        amt: 2100,
+      },
+];
+
 export default function GameViewModel() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
@@ -22,11 +67,14 @@ export default function GameViewModel() {
         }
     }, []);
 
-    // grid
-    const [grid, setGrid] = useState(() => (
-        Array(NUMROWS * NUMCOLS).fill(0)
-    ));
-    
+    const setupBoard = () => {
+        const grid = [];
+        for(let i = 0; i < NUMROWS * NUMCOLS; i++){
+            grid.push(Math.random() > 0.5 ? 0 : 1)
+        }
+        return grid;
+    }
+
     // game stats
     const [money, setMoney] = useState(MONEY);
     const [power, setPower] = useState(POWER);
@@ -36,6 +84,8 @@ export default function GameViewModel() {
     
     const [time, setTime] = useState(0);
     const [paused, setPaused] = useState(false);
+    const [grid, setGrid] = useState(setupBoard);
+    const [showGraph, setShowGraph] = useState(false);
 
     useEffect(() => {
         if(paused) return;
@@ -46,7 +96,6 @@ export default function GameViewModel() {
         return () => clearInterval(interval);
     }, [time]);
 
-
     // user progression
     const [gameState, setGameState] = useState(1);
 
@@ -56,6 +105,11 @@ export default function GameViewModel() {
 
     // mark intents
     const handleKeyPress = (e) => {
+        if(gameState == 0){
+            setGameState(1);
+            return;
+        }
+
         switch(e.key){
             case 'ArrowUp':
                 // moves up
@@ -93,9 +147,6 @@ export default function GameViewModel() {
     }
 
     const getTime = () => {
-        // convert time to seconds and minutes and hours
-        // return time
-        
         let hours = Math.floor(time / 3600);
         let minutes = Math.floor((time - (hours * 3600)) / 60);
         let seconds = Math.round(time - (hours * 3600) - (minutes * 60));
@@ -111,8 +162,24 @@ export default function GameViewModel() {
         return `${hours}:${minutes}:${seconds}`
     }
 
-    Array.from(Array(NUMROWS * NUMCOLS), () => Array(NUMCOLS).fill(false))
 
+    const getCell = (row, col) => {
+        return grid[row * NUMROWS + col];
+    }
+
+    const setCell = (row, col, val) => {
+        const newGrid = [...grid];
+        newGrid[row * NUMROWS + col] = val;
+        setGrid(newGrid);
+    }
+
+    const getProductionInfo = () => {
+        return SAMPLE_DATA; // TODO: STUB
+    }
+
+    const toggleShowGraph = () => {
+        setShowGraph(!showGraph);
+    }
 
     return {
         money, setMoney,
@@ -126,5 +193,7 @@ export default function GameViewModel() {
         y, setY,
         gameState, setGameState,
         grid, setGrid,
+
+        getProductionInfo, showGraph, toggleShowGraph
     }
 }; 

@@ -4,6 +4,6 @@
 
 .griddy{
     display: grid;
-    grid-template-columns: repeat(20, 64px);
+    grid-template-columns: repeat(20, 128px);
     grid-gap: 0 rem;
 }
