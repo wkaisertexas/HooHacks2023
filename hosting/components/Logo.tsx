@@ -1,7 +1,9 @@
+import Image from 'next/image'
+
 export default function Logo() {
     return (
-        <div>
-        <h1>Millennium Power</h1>
+        <div className='flex flex-col items-center'>
+        <Image alt='Millenium Power' width="320" height="288" src='/title.png'></Image>
         </div>
     )
 }

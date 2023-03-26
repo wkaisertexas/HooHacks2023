@@ -9,6 +9,9 @@ const BASE_TIME = 0; // days since 2000
 
 const MOVE_SPEED = 1; // moves per second
 
+const NUMROWS = 20;
+const NUMCOLS = 20;
+
 export default function GameViewModel() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
@@ -18,7 +21,9 @@ export default function GameViewModel() {
     }, []);
 
     // grid
-    const [grid, setGrid] = useState([]);
+    const [grid, setGrid] = useState(() => (
+        Array(NUMROWS * NUMCOLS).fill(0)
+    ));
     
     // game stats
     const [money, setMoney] = useState(MONEY);
@@ -52,6 +57,11 @@ export default function GameViewModel() {
         switch(e.key){
             case 'ArrowUp':
                 // moves up
+                // gets the duration of the event
+                // moves the player
+                // updates the time
+
+
 
                 break;
             case 'ArrowDown':
@@ -78,17 +88,39 @@ export default function GameViewModel() {
         return time;
     }
 
+    const getTime = () => {
+        // convert time to seconds and minutes and hours
+        // return time
+        
+        let hours = Math.floor(time / 3600);
+        let minutes = Math.floor((time - (hours * 3600)) / 60);
+        let seconds = Math.round(time - (hours * 3600) - (minutes * 60));
+
+        if (hours === 0 && minutes === 0){
+            return `${seconds}`;
+        } else{
+            if (hours === 0){
+                return `${minutes}:${seconds}`;
+            }
+        }
+
+        return `${hours}:${minutes}:${seconds}`
+    }
+
+    Array.from(Array(NUMROWS * NUMCOLS), () => Array(NUMCOLS).fill(false))
+
+
     return {
         money, setMoney,
         power, setPower,
         population, setPopulation,
         pollution, setPollution,
         happiness, setHappiness,
-        time, setTime, getDate,
+        time, setTime, getDate, getTime,
         paused, setPaused, toggleTime,
         x, setX,
         y, setY,
         gameState, setGameState,
-        grid
+        grid, setGrid,
     }
 }; 

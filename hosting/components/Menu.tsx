@@ -61,14 +61,17 @@ export default function Menu(props){
 
     if(openedMenu){
         return (
-                <div className='flex flex-col justify-center items-center bg-white rounded-lg p-5'>
-                    <p className='text-3xl font-bold'>Plants</p>
-                    <p className='text-xl font-bold' onClick={toggleMenu}>Close Menu</p>
-                    <div className='overflow-x-auto'>
+                <div className='flex flex-col justify-center bg-white rounded-lg p-5'>
+                    <div className='flex flex-col items-start'>
+                        <p className='text-3xl font-bold'>Power Plants</p>
+                        <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>
+                    </div>
+                    <div className='overflow-y-scroll'>
+                    <div className='flex flex-row'>
                         {plants.map((plant) => {
                             return (
                                 <div className='card flex flex-row'>
-                                    <div className='flex flex-col justify-center items-center'>
+                                    <div className='flex flex-col'>
                                         <h2>{plant.name}</h2>
                                         <p>{plant.description}</p>
                                         <p>Cost: {plant.cost}</p>
@@ -81,6 +84,7 @@ export default function Menu(props){
                                 </div>
                             )
                         })}
+                    </div>
                     </div>
             </div>
         )

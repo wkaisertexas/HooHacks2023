@@ -1,38 +1,25 @@
 import React, {useState} from 'react';
 import Cell from './Cell';
 
-const NUMROWS = 50;
-const NUMCOLS = 50;
+const NUMROWS = 20;
+const NUMCOLS = 20;
 
 export default function Grid(props) {
-    const [grid, setGrid] = useState(() => {
-        const rows = [];
-        for(let i = 0; i < NUMROWS; i++){
-            rows.push(Array.from(Array(NUMCOLS), () => false));
-        }
-        return rows;
-    })
+    const [viewModel, setViewModel] = useState(props.viewModel);
     
     const setCell = (row, col, val) => {
-        const newGrid = [...grid];
-        newGrid[row][col] = val;
-        setGrid(newGrid);
+        const newGrid = [...viewModel.grid];
+        newGrid[row * NUMROWS + col] = val;
+        viewModel.setGrid(newGrid);
     }
     
     return (
-        <div className='grid'>
+        <div className='griddy top-0 left-0 absolute -z-10'>
             {
-                grid.map((row, rowIdx) => (
-                    <div className='row' key={rowIdx}>
-                        {
-                        row.map((col, colIdx) => (
-                            col
-                        ))
-                        }
-                    </div>
+                viewModel.grid.map((elem, id) => (
+                    <Cell key={id} value={elem}/>
                 ))
             }
-            <Cell />
         </div>
     )
-}
+}``

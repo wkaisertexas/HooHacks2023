@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import GenerationGraph  from '../components/GenerationGraph'
+import Logo from '../components/Logo'
 
 export default function IndexPage() {
   
