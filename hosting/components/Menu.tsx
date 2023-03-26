@@ -61,7 +61,7 @@ export default function Menu(props){
 
     if(openedMenu){
         return (
-            <div className='flex flex-col justify-center items-center'>
+            <div className='flex flex-col stroke-2 rounded-xl max-w-3xl'>
                 <div className='flex flex-col justify-center items-center bg-white rounded-lg p-5'>
                     <p className='text-3xl font-bold'>Plants</p>
                     <p className='text-xl font-bold' onClick={toggleMenu}>Close Menu</p>
