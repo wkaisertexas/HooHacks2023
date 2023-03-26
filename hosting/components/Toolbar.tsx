@@ -42,6 +42,8 @@ export default function Toolbar(props) {
             <p className="px-2 py-1 rounded-sm text-white bg-green-500">Population: {prettyPop(viewModel.population)}</p>
 
             <p className="px-2 py-1 rounded-sm text-white bg-black">{viewModel.getDate()}</p>
+            
+            <p className="px-2 py-1 rounded-sm text-white bg-purple-700">Time: {viewModel.getTime()}</p>
 
             {viewModel.paused ? <p className="px-2 py-1 rounded-sm text-white bg-red-500" onClick={viewModel.toggleTime}>Play</p> : <p className="px-2 py-1 rounded-sm text-white bg-green-500" onClick={viewModel.toggleTime}>Pause</p>}
         </div>

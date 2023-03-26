@@ -52,6 +52,11 @@ export default function GameViewModel() {
         switch(e.key){
             case 'ArrowUp':
                 // moves up
+                // gets the duration of the event
+                // moves the player
+                // updates the time
+
+
 
                 break;
             case 'ArrowDown':
@@ -78,13 +83,32 @@ export default function GameViewModel() {
         return time;
     }
 
+    const getTime = () => {
+        // convert time to seconds and minutes and hours
+        // return time
+        
+        let hours = Math.floor(time / 3600);
+        let minutes = Math.floor((time - (hours * 3600)) / 60);
+        let seconds = Math.round(time - (hours * 3600) - (minutes * 60));
+
+        if (hours === 0 && minutes === 0){
+            return `${seconds}`;
+        } else{
+            if (hours === 0){
+                return `${minutes}:${seconds}`;
+            }
+        }
+
+        return `${hours}:${minutes}:${seconds}`
+    }
+
     return {
         money, setMoney,
         power, setPower,
         population, setPopulation,
         pollution, setPollution,
         happiness, setHappiness,
-        time, setTime, getDate,
+        time, setTime, getDate, getTime,
         paused, setPaused, toggleTime,
         x, setX,
         y, setY,
