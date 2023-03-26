@@ -9,10 +9,12 @@ export enum CellType {
     Empty = 4
 }
 
-export default function Cell({type}) {
+const CELL_SIZE = 64;
+
+export default function Cell(props) {
     return (
-        <div className='cell'>
-            <p>{type}</p>
+        <div className={`cell w-16 h-16`}>
+            <p>asdfas</p>
         </div>
     )
 }
