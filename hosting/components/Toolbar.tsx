@@ -35,6 +35,8 @@ export default function Toolbar(props) {
 
     return (
         <div className='flex flex-row justify-between'>
+
+
             <p className='bg-teal-700 text-white px-2 py-1 rounded-sm'>Cash: {prettyMoney(viewModel.money)}</p>
             
             <p className="px-2 py-1 rounded-sm text-white bg-orange-600">Power ⚡️: {prettyPower(viewModel.power)}</p>

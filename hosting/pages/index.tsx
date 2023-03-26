@@ -1,12 +1,14 @@
 import Link from 'next/link'
 
 import GenerationGraph  from '../components/GenerationGraph'
+import Logo from '../components/Logo'
 
 export default function IndexPage() {
   
   return (
     <div className='text-center'>
-      <br /><br /><br /><u><h1 className='text-5xl' >Millennium Power</h1></u><br />
+      
+      <Logo />
 
       <p className='text-3xl'>How would you manage the greatest energy transformation since the invention of the lightbulb?<br /></p>
       <p className='text-2xl'><br />Millennium Power puts you in charge of managing the power grids of Millenium Town.<br />

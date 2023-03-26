@@ -11,10 +11,12 @@ export enum CellType {
 
 const CELL_SIZE = 64;
 
+import Image from 'next/image'
+
 export default function Cell(props) {
     return (
-        <div className={`cell w-16 h-16`}>
-            <p>asdfas</p>
-        </div>
+        // <div className={`cell w-16 h-16`}>
+            <Image alt="grass" width="64" height="64" src='/grass.png' />
+        // </div>
     )
 }

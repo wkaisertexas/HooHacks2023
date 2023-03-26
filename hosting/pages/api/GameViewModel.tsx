@@ -9,6 +9,9 @@ const BASE_TIME = 0; // days since 2000
 
 const MOVE_SPEED = 1; // moves per second
 
+const NUMROWS = 20;
+const NUMCOLS = 20;
+
 export default function GameViewModel() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
@@ -18,7 +21,9 @@ export default function GameViewModel() {
     }, []);
 
     // grid
-    const [grid, setGrid] = useState([]);
+    const [grid, setGrid] = useState(() => (
+        Array(NUMROWS * NUMCOLS).fill(0)
+    ));
     
     // game stats
     const [money, setMoney] = useState(MONEY);
@@ -102,6 +107,9 @@ export default function GameViewModel() {
         return `${hours}:${minutes}:${seconds}`
     }
 
+    Array.from(Array(NUMROWS * NUMCOLS), () => Array(NUMCOLS).fill(false))
+
+
     return {
         money, setMoney,
         power, setPower,
@@ -113,6 +121,6 @@ export default function GameViewModel() {
         x, setX,
         y, setY,
         gameState, setGameState,
-        grid
+        grid, setGrid,
     }
 }; 
