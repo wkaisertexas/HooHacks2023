@@ -58,39 +58,38 @@ export default function Menu(props){
     const toggleMenu = () => {
         setOpenedMenu(!openedMenu);
     }
-
-    if(openedMenu){
+    if(!openedMenu){
         return (
-                <div className='flex flex-col justify-center bg-white rounded-lg p-5 m-2 '>
-                    <div className='flex flex-col items-start'>
-                        <p className='text-3xl font-bold'>Power Plants</p>
-                        <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>
-                    </div>
-                    <div className='overflow-x-scroll flex'>
-                        {plants.map((plant) => {
-                            return (
-                                <div className='card flex flex-row'>
-                                    <div className='flex flex-col'>
-                                        <h2 className='text-3xl font-bold'>{plant.name}</h2>
-                                        <p>{plant.description}</p>
-                                        <p><strong>Cost:</strong> {plant.cost}</p>
-                                        <p><strong>Power:</strong> {plant.power}</p>
-                                        <p><strong>Pollution:</strong> {plant.pollution}</p>
-                                    </div>
-                                    <div className='m-1 p-2 w-[32rem] stroke-black'>
-                                        <Image className='stroke-1 rounded-lg w-max' width='128' height='128' alt={plant.description} src={plant.image}/>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-            </div>
-        )
-    } 
-
-    return (
         <h1 className='stroke-1 rounded-lg p-2 m-2' onClick={toggleMenu}>
             <Image src='/menu.svg' alt='Menu' width={50} height={50}/>
         </h1>
         )
+    }
+
+    return (
+        <div className='flex flex-col justify-center bg-white rounded-lg p-5 m-2 '>
+            <div className='flex flex-col items-start'>
+                <p className='text-3xl font-bold'>Power Plants</p>
+                <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>
+            </div>
+            <div className='overflow-x-scroll flex'>
+                {plants.map((plant) => {
+                    return (
+                        <div className='card flex flex-row'>
+                            <div className='flex flex-col'>
+                                <h2 className='text-3xl font-bold'>{plant.name}</h2>
+                                <p>{plant.description}</p>
+                                <p><strong>Cost:</strong> {plant.cost}</p>
+                                <p><strong>Power:</strong> {plant.power}</p>
+                                <p><strong>Pollution:</strong> {plant.pollution}</p>
+                            </div>
+                            <div className='m-1 p-2 w-[32rem] border-solid rounded-md'>
+                                <Image className='stroke-1 rounded-lg w-max' width='128' height='128' alt={plant.description} src={plant.image}/>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+    </div>
+) 
 }

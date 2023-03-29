@@ -26,8 +26,6 @@ const MAPPING = {
 export default function Cell(props) {
     // allow for images to be dropped into the cell
 
-    
-
     if(props.value == CellType.Empty) {
         return (
             <div className='w-[32rem] h-[32rem]'>

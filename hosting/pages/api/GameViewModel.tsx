@@ -63,8 +63,10 @@ const SAMPLE_DATA = [
 ];
 
 const POP_PER_HOUSE = 500;
-const SAVE_INTERVAL = 31 / 7; // every 31 days
-const TIME_INTERVAL = 100; // miliseconds\
+const SAVE_INTERVAL = 31; // every 31 days
+const TIME_INTERVAL = 100; // miliseconds
+const UPDATE_INTERVAL = 3000; // miliseconds
+const POPULATION_GROWTH = 0.081; // 8.1% per year
 
 export default function GameViewModel() {
     useEffect(() => {
@@ -81,11 +83,31 @@ export default function GameViewModel() {
         }
 
         let num_building = NUM_BUILDINGS;
-        while(num_building > 0){
+        for(let i = 0; i < NUM_BUILDINGS; i++){
+            placeTile(grid, CellType.Building, (r) => Math.pow(r, 2));    
+        }
+        
+        let num_houses = Math.floor(POPULATION / POP_PER_HOUSE);
+        for(let i = 0; i < num_houses; i++){
+            placeTile(grid, CellType.House, (r) => Math.pow(r, 4));
+        }
+
+        for(let i = 0; i < NUM_TREES; i++){
+            placeTile(grid, CellType.Tree, (r) => 1.5 * Math.pow(r, 1/2));
+        }
+
+        return grid;
+    }
+
+    const placeTile = (grid, typeType, modifier) => {
+        while(true){
             var r = Math.random();
             let theta = Math.random() * 2 * Math.PI;
 
-            r = Math.pow(r, 2);
+            if(modifier != null){
+                r = modifier(r);
+            }
+
             r = r * NUMROWS / 2;
 
             let x = Math.floor(r * Math.cos(theta) + NUMROWS / 2);
@@ -95,52 +117,9 @@ export default function GameViewModel() {
             let index = x + y * NUMCOLS;
 
             if (grid[index] != CellType.Grass) continue; // already a house here    
-            grid[index] = CellType.Building;
-            num_building--;
+            grid[index] = typeType;
+            return;
         }
-
-        // generates housing closer to the center
-        let num_houses = Math.floor(POPULATION / POP_PER_HOUSE);
-        while(num_houses > 0){
-            var r = Math.random() * 1.5;
-            let theta = Math.random() * 2 * Math.PI;
-
-            r = r * r;
-            r = r * r;
-            r = r * NUMROWS / 2;
-
-            let x = Math.floor(r * Math.cos(theta) + NUMROWS / 2);
-            let y = Math.floor(r * Math.sin(theta) + NUMCOLS / 2);
-            if(x < 0 || x >= NUMROWS || y < 0 || y >= NUMCOLS) continue;
-
-            let index = x + y * NUMCOLS;
-            if (grid[index] != CellType.Grass) continue; // already a house here
-            grid[index] = CellType.House;
-            num_houses--;
-        }
-
-        // generates trees closer to the edge
-        let num_trees = NUM_TREES;
-        while(num_trees > 0){
-            var r = Math.random();
-            let theta = Math.random() * 2 * Math.PI;
-
-            r = Math.sqrt(r);
-            r = Math.sqrt(r);
-            r = Math.sqrt(r);
-            r = r * NUMROWS / 2 * 1.5;
-
-            let x = Math.floor(r * Math.cos(theta) + NUMROWS / 2);
-            let y = Math.floor(r * Math.sin(theta) + NUMCOLS / 2);
-            if(x < 0 || x >= NUMROWS || y < 0 || y >= NUMCOLS) continue;
-
-            let index = x + y * NUMCOLS;
-            if (grid[index] != CellType.Grass) continue; // already a tree here
-            grid[index] = CellType.Tree;
-            num_trees--;
-        }
-
-        return grid;
     }
 
     // game stats
@@ -157,12 +136,14 @@ export default function GameViewModel() {
     const [graphData, setGraphData] = useState([]);
 
     const [mostRecentSave, setMostRecentSave] = useState(0);
-    const [statGraph, setStatGraph] = useState(0);
+    const [statGraph, setStatGraph] = useState(null);
+
+    const [numHouses, setNumHouses] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(updateTime, TIME_INTERVAL);
         return () => clearInterval(interval);
-    }, [time]);
+    }, [time, graphData, mostRecentSave, population]);
 
     // user progression
     const [gameState, setGameState] = useState(1);
@@ -184,9 +165,6 @@ export default function GameViewModel() {
                 // gets the duration of the event
                 // moves the player
                 // updates the time
-
-
-
                 break;
             case 'ArrowDown':
                 // move down
@@ -205,11 +183,34 @@ export default function GameViewModel() {
     const updateTime = () => {
         if(paused) return;
         setTime(time + TIME_INTERVAL / 1000);
-
-        if(time - mostRecentSave > SAVE_INTERVAL){
+        
+        const deltaT = (time - mostRecentSave) * SECONDS_TO_DAYS;
+        if(deltaT > SAVE_INTERVAL){
             saveGame();
+            updateStats(deltaT);
             setMostRecentSave(time);
         };
+    }
+
+    const updateStats = (detlaT) => {
+        // Update population based on exponential growth ig
+        updatePopulation(detlaT);
+        updateMoney(detlaT);
+        
+        // Updates money based on production and consumption
+        // Updates power based on production
+        // Updates pollution based on production and consumption
+        // Updates happiness based on population and pollution
+    };
+
+    const updatePopulation = (deltaT) => {
+        // exponentially grows population
+        let newPop = population * Math.pow(1 + POPULATION_GROWTH, deltaT / 365);
+        setPopulation(newPop);
+    }
+
+    const updateMoney = () => {
+
     }
 
     const saveGame = () => {        
@@ -280,7 +281,8 @@ export default function GameViewModel() {
     }
 
     const toggleStatGraph = (name) => {
-        if(statGraph == name){
+        console.log(name);
+        if(statGraph === name){
             setStatGraph(0);
         } else{
             setStatGraph(name);

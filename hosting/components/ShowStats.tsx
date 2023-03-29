@@ -15,22 +15,24 @@ export default function ShowStats(props){
     const viewModel = props.viewModel;
     var stat = props.stat;
     const data = viewModel.getData();
+    
+    if (stat === null || stat === 0 || data === null) {
+        return (<></>)
+    }    
 
     if(!Array.isArray(stat)){
         stat = [stat];
     }
 
-    if (stat == null || data == null || viewModel.showGraph == false) {
-        return (<></>)
-    }        
-
     return (
         <div className='flex flex-col'>
             <p className='text-3xl font-bold'>{stat}</p>
 
+            {data.length}
+            <div className='w-[500px] h-[400px] m-2 p-2 bg-white rounded-md'>
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
-                    width={500}
+                    width={400}
                     height={300}
                     data={data}
                     margin={{
@@ -55,6 +57,7 @@ export default function ShowStats(props){
                     }
                 </LineChart>
             </ResponsiveContainer>
+            </div>
         </div>
     )
 
