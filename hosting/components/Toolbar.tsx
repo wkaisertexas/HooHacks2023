@@ -48,10 +48,12 @@ export default function Toolbar(props) {
                 <p onClick={() => viewModel.toggleStatGraph('population')} className="px-2 py-1 rounded-sm text-white bg-green-500">Population: {prettyPop(viewModel.population)}</p>
             </div>
             <div >
-            <p onClick={() => viewModel.toggleStatGraph('date')} className="px-2 py-1 rounded-sm text-white bg-black">{viewModel.getDate()}</p>
+                <p onClick={() => viewModel.toggleStatGraph('date')} className="px-2 py-1 rounded-sm text-white bg-black">{viewModel.getDate()}</p>
             </div>
-            <p className="px-2 py-1 rounded-sm text-white bg-purple-700">Time: {viewModel.getTime()}</p>
 
+            <div>
+                <p onClick={() => viewModel.toggleStatGraph('time')} className="px-2 py-1 rounded-sm text-white bg-purple-700">Time: {viewModel.getTime()}</p>
+            </div>
             {viewModel.paused ? <p className="px-2 py-1 rounded-sm text-white bg-red-500" onClick={viewModel.toggleTime}>Play</p> : <p className="px-2 py-1 rounded-sm text-white bg-green-500" onClick={viewModel.toggleTime}>Pause</p>}
         </div>
         <Logo />
