@@ -7,6 +7,7 @@ export enum CellType {
     Tree = 2,
     Solar = 3,
     Empty = 4,
+    Building = 5,
 }
 
 const CELL_SIZE = 64;
@@ -19,9 +20,14 @@ const MAPPING = {
     '2': '/trees.png',
     '3': '/solar.png',
     '4': '',
+    '5': '/building.png',
 }
 
 export default function Cell(props) {
+    // allow for images to be dropped into the cell
+
+    
+
     if(props.value == CellType.Empty) {
         return (
             <div className='w-[32rem] h-[32rem]'>
