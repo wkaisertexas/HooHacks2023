@@ -14,6 +14,7 @@ const plants = [
         power: 10,
         pollution: 0,
         image: '/nuclear.png',
+        size: [2, 2],
     },
     {
         name: 'Solar',
@@ -22,6 +23,7 @@ const plants = [
         power: 100,
         pollution: 0,
         image: '/solar.png',
+        size: [1, 1],
     },
     {
         name: 'Wind',
@@ -30,6 +32,7 @@ const plants = [
         power: 1000,
         pollution: 0,
         image: '/wind.png',
+        size: [1, 2],
     },
     // {
     //     name: 'Hydro',
@@ -72,10 +75,10 @@ export default function Menu(props){
                 <p className='text-3xl font-bold'>Power Plants</p>
                 <p className='text-md font-semibold' onClick={toggleMenu}>Close Menu</p>
             </div>
-            <div className='overflow-x-scroll flex'>
+            <div className='overflow-x-scroll flex space-x-2'>
                 {plants.map((plant) => {
                     return (
-                        <div className='card flex flex-row'>
+                        <div className='card flex flex-row border-4 border-black p-2 rounded-md space-x-2 items-center'>
                             <div className='flex flex-col'>
                                 <h2 className='text-3xl font-bold'>{plant.name}</h2>
                                 <p>{plant.description}</p>
@@ -83,8 +86,9 @@ export default function Menu(props){
                                 <p><strong>Power:</strong> {plant.power}</p>
                                 <p><strong>Pollution:</strong> {plant.pollution}</p>
                             </div>
-                            <div className='m-1 p-2 w-[32rem] border-solid rounded-md'>
-                                <Image className='stroke-1 rounded-lg w-max' width='128' height='128' alt={plant.description} src={plant.image}/>
+
+                           <div className='border-2 border-black h-min rounded-md p-1'>
+                                <Image className={`w-[${16 * plant.size[0]}rem]`} width='128' height='128' alt={plant.description} src={plant.image}/>
                             </div>
                         </div>
                     )

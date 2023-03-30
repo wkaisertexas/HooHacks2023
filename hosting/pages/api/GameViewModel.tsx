@@ -66,7 +66,9 @@ const POP_PER_HOUSE = 500;
 const SAVE_INTERVAL = 31; // every 31 days
 const TIME_INTERVAL = 100; // miliseconds
 const UPDATE_INTERVAL = 3000; // miliseconds
+
 const POPULATION_GROWTH = 0.081; // 8.1% per year
+const DEMAND_GROWTH = 0.03; // 3% per year
 
 export default function GameViewModel() {
     useEffect(() => {
@@ -124,7 +126,7 @@ export default function GameViewModel() {
 
     // game stats
     const [money, setMoney] = useState(MONEY);
-    const [power, setPower] = useState(POWER);
+    const [powerProduction, setPowerProduction] = useState(POWER);
     const [population, setPopulation] = useState(POPULATION);
     const [pollution, setPollution] = useState(POLLUTION);
     const [happiness, setHappiness] = useState(HAPPINESS);
@@ -139,11 +141,16 @@ export default function GameViewModel() {
     const [statGraph, setStatGraph] = useState(null);
 
     const [numHouses, setNumHouses] = useState(0);
+    const [numBuildings, setNumBuildings] = useState(0);
+
+    const [powerPlants, setPowerPlants] = useState([]);
+    const [demand_per_person, setDemandPerPerson] = useState(3000);
+    const [demand, setDemand] = useState(POWER);
 
     useEffect(() => {
         const interval = setInterval(updateTime, TIME_INTERVAL);
         return () => clearInterval(interval);
-    }, [time, graphData, mostRecentSave, population]);
+    }, [time, graphData, mostRecentSave, population, demand_per_person, demand, powerProduction]);
 
     // user progression
     const [gameState, setGameState] = useState(1);
@@ -192,10 +199,13 @@ export default function GameViewModel() {
         };
     }
 
-    const updateStats = (detlaT) => {
+    const updateStats = (deltaT) => {
         // Update population based on exponential growth ig
-        updatePopulation(detlaT);
-        updateMoney(detlaT);
+        updatePopulation(deltaT);
+        
+        updateDemand(deltaT);
+        
+        updateMoney(deltaT);
         
         // Updates money based on production and consumption
         // Updates power based on production
@@ -209,14 +219,25 @@ export default function GameViewModel() {
         setPopulation(newPop);
     }
 
-    const updateMoney = () => {
+    const updateDemand = (deltaT) => {
+        let newDemandPerPerson = demand_per_person * Math.pow(1 + DEMAND_GROWTH, deltaT / 365);
+
+        let newDemand = newDemandPerPerson * population;
+
+        setDemandPerPerson(newDemandPerPerson);
+        setDemand(newDemand);
+
+        setPowerProduction(newDemand);
+    }
+
+    const updateMoney = (deltaT) => {
 
     }
 
     const saveGame = () => {        
         let saveData = {
             money: money,
-            power: power,
+            power: powerProduction,
             population: population,
             pollution: pollution,
             happiness: happiness,
@@ -291,7 +312,7 @@ export default function GameViewModel() {
 
     return {
         money, setMoney,
-        power, setPower,
+        power: powerProduction, setPower: setPowerProduction,
         population, setPopulation,
         pollution, setPollution,
         happiness, setHappiness,

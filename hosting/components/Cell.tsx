@@ -33,9 +33,18 @@ export default function Cell(props) {
         ) 
     }
 
+    if(props.value == CellType.Grass){
+        return (
+            <div>
+                <Image alt="" width="128" height="128" src={MAPPING[props.value]} />
+            </div>
+        )
+    }
+
     return (
-        <div className=''>
-            <Image className='' alt="" width="128" height="128" src={MAPPING[props.value]} />
+        <div className='relative row-span-1 col-span-1'>
+            <Image className='absolute z-1 block left-0 right-0' alt="" width="128" height="128" src={MAPPING[CellType.Grass]} />
+            <Image className='relative block z-0' alt="" width="128" height="128" src={MAPPING[props.value]} />
         </div>
     )
 }
